@@ -21,3 +21,692 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+ion-item.item {
+  color: white;
+  &.activated{
+    background:transparent;
+  }
+  .icon {
+    font-size: 25px;
+  }
+  .second-right {
+    position: absolute;
+    right: 50px;
+  }
+}
+
+.user-icon-item {
+  height: 70px;
+  .user-icon {
+    width: 50px;
+    top: 10px;
+  }
+  span.text {
+    display: inline-block;
+    margin-top: 8px;
+  }
+}
+
+.modal-view {
+  background: transparent;
+}
+
+.modal-bottom {
+  position: absolute;
+  width: 100%;
+  bottom: 10px;
+  padding: 10px;
+  background: white;
+  color: #444;
+}
+
+.version-modal {
+  margin-bottom: 40px;
+  .version-description {
+    min-height: 60px;
+    margin-bottom: 10px;
+  }
+  .button {
+    border-radius: 100%;
+    min-width: auto;
+    height: 45px;
+    width: 45px;
+  }
+  .button-assertive {
+    padding: 0;
+    font-size: 45px;
+    margin-left: 60px;
+    span {
+      position: relative;
+      top: -5px;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Empty. Add your own CSS if you like */
+
+$main-background-color: #1E2F37;
+
+
+body {
+  background-color: $main-background-color
+}
+
+.pane {
+  background-color: transparent;
+}
+
+.scroll-content,
+.ionic-scroll {
+  background-color: $main-background-color
+}
+
+.login-container {
+  &.pane,
+  &.view {
+    background-color: $main-background-color
+  }
+}
+
+img {
+  max-width: 100%;
+}
+
+.col-offset-5 {
+  margin-left: 5%;
+}
+
+.col-offset-15 {
+  margin-left: 15%;
+}
+
+.item,
+.list-inset {
+  background: transparent;
+}
+
+
+
+.button.button-positive {
+  background-color: #0093e3;
+}
+
+
+a,
+a:link,
+a:hover,
+a:visited {
+  color: #fff;
+  text-decoration: none;
+}
+
+.fixed-footer {
+  position: fixed;
+  width: 100%;
+}
+
+.alert-error-message {
+  text-align: center;
+  span {
+    font-size: 12px;
+    display: inline-block;
+    padding: 3px 10px;
+    background: #ddd;
+    color: black;
+    border-radius: 15px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Start Login css */
+
+$headerBG:#1A1927;
+$mainColor: #fff;
+$mainModalBGColor:rgb(0, 147, 227);
+
+.input-inline-divider {
+  display: inline-block;
+  border-right: 1px solid #fff;
+  line-height: 30px;
+  margin-right: 15px;
+  margin-left: 5px;
+}
+
+.logo-container {
+  img {
+    margin-top: -40px;
+  }
+}
+
+.login-container {
+  .list-inset {
+    border-radius: 5px;
+  }
+
+  .login-input-contaienr {
+    input {
+      color: #fff;
+    }
+    label {
+      background-color: #3E4f6a;
+      /* TODO: Color */
+      border-radius: 5px;
+      border: none;
+    }
+    .item-input {
+      padding-top: 4px;
+      padding-bottom: 4px;
+
+      &:not(:first-child) {
+        margin-top: 30px;
+      }
+    }
+    .icon {
+      width: 28px;
+      height: 100%;
+      max-height: 28px;
+    }
+
+    .login-btn {
+      margin-top: 80px;
+    }
+  }
+
+  .login-form {
+    margin-top: -20px;
+  }
+
+  .help-container {
+    text-align: right;
+    padding-right: 10%;
+    bottom: 20px;
+    a {
+      padding: 5px;
+    }
+  }
+}
+
+.setting-icon {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  max-width: 47px;
+  max-height: 47px;
+  padding: 10px;
+  z-index: 1;
+}
+
+// TODO: these class might remove.
+.error-container {
+  background: red;
+  padding: 10px;
+  margin-top: 20px;
+  p {
+    color: white;
+    margin-bottom: 0;
+  }
+}
+
+$headerBG:#2B2B2B;
+$mainColor: #fff;
+
+.icon-small {
+  max-width: 18px;
+}
+
+.icon-medium {
+  max-width: 28px;
+}
+
+.ionic-body,
+body,
+h4 {
+  color: $mainColor;
+}
+
+.back-login-footer {
+  position: absolute;
+  bottom: 10px;
+  left: 10%;
+}
+
+.help-container {
+  .guide-link-container {
+    >.row:not(:last-child) {
+      margin-bottom: 30px;
+    }
+    a {
+      display: block;
+      width: 100%;
+      padding: 5px;
+      padding-left: 10%;
+      >img {
+        position: relative;
+        top: 4px;
+        margin-right: 30px;
+      }
+    }
+  }
+}
+
+.general-problem-container {
+  .general-problem-header {
+    padding: 10px;
+    background: $headerBG;
+    h4 {
+      margin: 0;
+      span {
+        position: relative;
+        top: -6px;
+        margin-left: 5px;
+      }
+    }
+  }
+
+  .general-problem-content {
+    padding: 10px;
+  }
+}
+
+.reset-pwd-container {
+  .valid-code-button {
+    min-height: auto;
+    line-height: 40px;
+    margin-top: -4px;
+    margin-bottom: -4px;
+  }
+
+  .reset-pwd-input-container {
+    margin-top: -20px;
+  }
+
+  .login-input-contaienr.reset-pwd-input-container .item-input:not(:first-child) {
+    margin-top: 10px;
+  }
+
+  .reset-pwd-btn {
+    margin-top: 50px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Starts Server setting modal. */
+
+.modal.server-setting-modal {
+  background: transparent;
+  .server-setting-modal-content {
+    width: 250px;
+    height: 250px;
+    margin-top: -125px;
+    margin-left: -125px;
+    background: $mainModalBGColor;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 15px;
+    border-radius: 5px;
+    .item {
+      border: none;
+    }
+    .item-input {
+      label {
+        color: white;
+      }
+      input {
+        background: white;
+        border-radius: 5px;
+        padding: 3px;
+        text-align: center;
+      }
+    }
+
+    .server-ip-row {
+      margin-bottom: 40px;
+    }
+    .button-container {
+      margin-top: 40px;
+      padding-left: 10%;
+      padding-right: 10%;
+      span {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+        text-align: center;
+        font-size: 30px;
+
+        &.ok-btn {
+          background: #99CC00;
+        }
+        &.reset-btn {
+          background: red;
+          float: right;
+          i {
+            position: relative;
+            left: 2px;
+            top: -1px;
+          }
+        }
+      }
+      i {
+        line-height: 40px;
+      }
+    }
+  }
+}
+
+.modal-backdrop-bg {
+  background: #000;
+  opacity: 0.8;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* End Server setting modal.  */
+
+.home-tab-nav {
+  a.tab-item {
+    opacity: 1;
+    &.tab-item-active {
+      color: #1E2F37;
+    }
+
+    &:last-child {
+      flex: 0.4;
+      i {
+        position: relative;
+        top: 5px;
+      }
+      .tab-title {
+        display: none;
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* download progress modal. */
+
+.down-load-progress-modal {
+  background: transparent;
+
+  .down-load-progress-modal-content {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    background: white;
+    color: black;
+    text-align: center;
+
+    .progress-message {
+      margin-top: 10px;
+    }
+  }
+}
+
+.home-container {
+  color: white;
+}
+
+.home-tab-nav,
+.tabs-positive {
+  a.tab-item {
+    color: white;
+    border: none !important;
+    opacity: 1;
+    margin-top: -2px !important;
+
+    &:last-child {
+      flex: 0.4;
+      i {
+        position: relative;
+        top: 5px;
+      }
+      .tab-title {
+        display: none;
+      }
+    }
+  }
+}
+
+.tabs-striped.tabs-positive .tab-item {
+  color: white;
+}
+
+.tabs-striped.tabs-positive .tab-item {
+  &.tab-item-active {
+    color: #1E2F37;
+    margin-top: 0
+  }
+}
+
+.home-contact-container {
+  .item-divider {
+    background-color: #8f959a;
+    color: #fff;
+    border: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    min-height: auto;
+  }
+
+  .bar-subheader {
+    background: #415357;
+    .item-input {
+      padding-left: 0;
+      border: none;
+      width: 100%;
+    }
+    .ion-search {
+      font-size: 28px;
+      margin-right: 10px;
+    }
+    input {
+      color: white;
+      padding-top: 0;
+    }
+  }
+
+  .distinct-dispatcher {
+    margin-right: 20px;
+    .dispatcher-list {
+      display: flex;
+      padding: 5px;
+      li {
+        padding: 0 10px;
+        text-align: center;
+      }
+    }
+  }
+
+  .contacts-category-list {
+    .item {
+      margin-right: 20px;
+    }
+    .item-avatar {
+      min-height: auto;
+      margin-right: 20px;
+      border-right: none;
+      .item-content {
+        background: transparent;
+        min-height: 45px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-right: 10px;
+        img {
+          max-height: 35px;
+          width: auto;
+          top: 5px;
+        }
+        h2 {
+          color: #fff;
+          line-height: 30px;
+        }
+      }
+    }
+  }
+
+  .home-contact-sidebar {
+    ul.active {
+      background: black;
+      border-radius: 10px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+    position: fixed;
+    top: 70px;
+    bottom: 50px;
+    right: 0;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    ul {
+      width: 100%;
+      li {
+        line-height: 30px;
+      }
+    }
+  }
+
+  .current-index {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 50px;
+    width: 50px;
+    background: white;
+    border-radius: 5px;
+    margin-left: -25px;
+    margin-top: -25px;
+    text-align: center;
+  }
+}

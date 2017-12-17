@@ -1,0 +1,74 @@
+<ion-view>
+  <ion-header-bar class="bar-positive">
+    <div class="buttons">
+      <i class="icon ion-arrow-left-a"></i>
+    </div>
+    <h1 class="title">设置</h1>
+    <a href="">
+      <i class="icon ion-md-add"></i>
+    </a>
+  </ion-header-bar>
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-icon-right user-icon-item">
+        <span class="text">更改头像</span>
+        <img class="second-right user-icon" src="img/appicon.png" alt="user icon">
+        <i class="icon ion-ios-arrow-forward"></i>
+      </ion-item>
+      <ion-item class="item-icon-right">更改昵称
+        <span class="second-right">BMS1</span>
+        <i class="icon ion-ios-arrow-forward"></i>
+      </ion-item>
+      <ion-item class="item-icon-right">修改密码
+        <i class="icon ion-ios-arrow-forward"></i>
+      </ion-item>
+      <ion-item class="item-icon-right">功能设定
+        <i class="icon ion-ios-arrow-forward"></i>
+      </ion-item>
+      <ion-item class="item-icon-right">情景模式
+        <i class="icon ion-ios-arrow-forward"></i>
+      </ion-item>
+      <ion-item class="item-icon-right">历史消息
+        <i class="icon ion-ios-arrow-forward"></i>
+      </ion-item>
+      <ion-item class="item-icon-right">系统设置
+        <i class="icon ion-ios-arrow-forward"></i>
+      </ion-item>
+      <ion-item class="item-icon-right" ng-click="upgradeVersion = true;versionModal.show();">版本更新
+        <span class="second-right"> VER_2.7.2</span>
+        <i class="icon ion-ios-arrow-forward"></i>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+  <script id="verison-modal.html" type="text/ng-template">
+    <ion-modal-view class="modal-view version-modal">
+      <div class="modal-content modal-bottom text-center">
+        <div ng-if="!modal.upgradeVersion">
+          <div class="version-description">
+            <p>当前已是最新版</p>
+          </div>
+          <div class="button-container">
+            <button class="ok-btn button button-positive" ng-click="modal.hide();">
+              <i class="ion-checkmark-round"></i>
+            </button>
+          </div>
+        </div>
+        <div ng-if="modal.upgradeVersion">
+          <div class="version-description">
+            <p>有新版本是否下载？</p>
+            V.2.7.3 支持轨迹
+          </div>
+          <div class="button-container">
+            <button class="ok-btn button button-positive" ng-click="modal.hide();">
+              <i class="icon ion-checkmark-round"></i>
+            </button>
+            <button class="ok-btn button button-assertive" ng-click="modal.hide();">
+              <span>&times;</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </ion-modal-view>
+  </script>
+  <download-modal></download-modal>
+</ion-view>

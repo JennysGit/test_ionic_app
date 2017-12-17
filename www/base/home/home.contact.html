@@ -1,0 +1,62 @@
+<ion-view class="home-contact-container">
+  <ion-header-bar class="bar-positive">
+    <!-- <img src="img/icon/itrunk_logo.png" alt="logo"> -->
+    <a href="">
+      <i class="icon ion-md-alert"></i>
+    </a>
+    <h1 class="title title-center">通讯录</h1>
+    <a href="">
+      <i class="icon ion-md-add"></i>
+    </a>
+  </ion-header-bar>
+  <ion-header-bar class="bar-subheader item-input">
+    <label class="item item-input">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input type="text" placeholder="搜索" ng-model="searchText">
+    </label>
+  </ion-header-bar>
+  <ion-content>
+    <div class="distinct-dispatcher">
+      <div class="item-divider">直管调度台</div>
+      <ul class="dispatcher-list">
+        <li ng-repeat="dispatcher in [1,2]">
+          <img src="img/icon/itrunk_console.png" alt="distinct-dispatcher" />
+          <p class="dispatcher-name">
+            调度台{{dispatcher}}
+          </p>
+        </li>
+      </ul>
+      </ion-list>
+    </div>
+    <ion-list class="star-contacts contacts-category-list" ng-if="starContacts && starContacts.length > 0">
+      <ion-item class="item-divider">星标联系人</ion-item>
+      <ion-item class="item-remove-animate item-avatar" ng-repeat="contact in starContacts" href="">
+        <img src="img/icon/itrunk_user.png" />
+        <h2>{{contact.nick_name}}</h2>
+      </ion-item>
+    </ion-list>
+    <ion-list class="recent-contacts contacts-category-list" ng-if="recentContacts && recentContacts.length > 0">
+      <ion-item class="item-divider"> 最近联系人</ion-item>
+      <ion-item class="item-remove-animate item-avatar" ng-repeat="contact in recentContacts" type="item-text-wrap" href="">
+        <img src="img/icon/itrunk_user.png" />
+        <h2>{{contact.nick_name}}</h2>
+      </ion-item>
+    </ion-list>
+    <ion-list class="all-contacts contacts-category-list" ng-if="allContacts && allContacts.length > 0" ng-repeat="cateContacts in allContacts">
+      <ion-item id="contactIndex{{cateContacts.start}}" class="item-divider">{{cateContacts.start}}</ion-item>
+      <ion-item class="item-remove-animate item-avatar" ng-repeat="contact in cateContacts.contacts" type="item-text-wrap" href="">
+        <img src="img/icon/itrunk_user.png" />
+        <h2>{{contact.nick_name}}</h2>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+  <div class="side-bar home-contact-sidebar">
+    <ul ng-class="{'active': !hideNum}">
+      <li class="side-bar-item" ng-repeat="item in sidebarList" on-touch="goToIndex($event,item)" on-release="clearNum()" on-drag="moveIndex($event,item)">
+        {{item}}
+      </li>
+    </ul>
+  </div>
+  <div class="current-index" ng-hide="hideNum">
+    <h1>{{currentIndex}}</h1></div>
+</ion-view>

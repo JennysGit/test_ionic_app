@@ -1,0 +1,110 @@
+<ion-view hide-nav-bar="true" title="login page">
+  <!--  <ion-nav-title class="logo-container">
+    <img src="img/icon/itrunk_logo_big.png" alt="itrunk logo">
+  </ion-nav-title> -->
+  <div class="logo-container row">
+    <div class="col col-offset-15 col-67">
+      <img src="img/icon/itrunk_logo_big.png" alt="itrunk logo">
+    </div>
+  </div>
+  <form name="loginForm" ng-hide="showHelpSection" class="login-container">
+    <div class="row login-input-contaienr">
+      <div class="col col-offset-5 col-90">
+        <div class="list list-inset">
+          <label class="item item-input">
+            <img class="icon" src="img/icon/itrunk_user.png" alt="user">
+            <span class="input-inline-divider">&nbsp;</span>
+            <input type="text" placeholder="用户名" ng-model="loginModel.username">
+          </label>
+          <label class="item item-input">
+            <img class="icon" src="img/icon/itrunk_psw.png" alt="password">
+            <span class="input-inline-divider">&nbsp;</span>
+            <input type="password" placeholder="密码">
+          </label>
+          <button class="button button-block button-positive login-btn" ng-click="doLogin()">
+            登录
+            <a href="" class="setting-icon" ng-click="openSettingServerModal($event)">
+            <img src="img/icon/iturnk_setting.png" alt="setting">
+          </a>
+          </button>
+          <!--   <div class="alert-error-message" >
+            <span ng-show="errorUserName">用户名不能为空!</span>
+          </div> -->
+          <alert-error-message error-message="errorMessage"></alert-error-message>
+        </div>
+      </div>
+    </div>
+    <script id="server-setting-modal.html" type="text/ng-template">
+      <div class="modal server-setting-modal">
+        <ion-pane>
+          <div class="server-setting-modal-content list">
+            <div class="item item-input row server-ip-row">
+              <label for="serverIp" class="col-40"> Server IP</label>
+              <input id="serverIp" class="col-60" type="text" ng-model="loginModel.serverIp" required>
+            </div>
+            <div class="item item-input row">
+              <label for="serverPort" class="col-40">
+                Server Port
+              </label>
+              <input class="col-60" id="serverPort" type="text" ng-model="loginModel.servePort" required>
+            </div>
+            <div class="button-container">
+              <span class="ok-btn" ng-click="close();">
+            <i class="ion-checkmark-round"></i>
+            </span>
+              <span class="reset-btn" ng-click="resetServerToDefault()">
+              <i class="ion-refresh"></i>
+            </span>
+            </div>
+          </div>
+        </ion-pane>
+      </div>
+    </script>
+    <script id="my-modal.html" type="text/ng-template">
+      <div class="modal">
+        <ion-header-bar>
+          <h1 class="title" ng-click="modal.hide()">我的模型标题</h1>
+        </ion-header-bar>
+        <ion-content>
+          Hello!
+          <!--  <p>{{modal}}</p> -->
+          <p style="background-color: red">red {{modal}} </p>
+          <p style="color:blue">{{loginModel}}</p>
+        </ion-content>
+      </div>
+    </script>
+    <div class="back-login-footer">
+      <p>
+        <a ng-click="showHelpSection = true">需要帮助？</a>
+    </div>
+    </p>
+  </form>
+  <div class="help-container" ng-show="showHelpSection">
+    <div class="guide-link-container">
+      <div class="row">
+        <a ui-sref="generalProblem">
+          <img class="icon-small" src="img/icon/itrunk_ask.png" alt="help"/>
+          常见问题解答
+        </a>
+      </div>
+      <div class="row">
+        <a ui-sref="resetpwd">
+          <img  class="icon-small" src="img/icon/itrunk_psw.png" alt="password"/>
+          忘记密码
+        </a>
+      </div>
+      <div class="row">
+        <a ui-sref="syssetting">
+        <img  class="icon-small" src="img/icon/iturnk_setting.png" alt="setting"/>
+          系统设置
+        </a>
+      </div>
+    </div>
+    <div class="back-login-footer">
+      <p>
+        <a ng-click="showHelpSection = false;">返回登录</a>
+      </p>
+    </div>
+  </div>
+  <download-modal id="downloadModal"></download-modal>
+</ion-view>
