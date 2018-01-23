@@ -9613,10 +9613,10 @@ a.button {
     margin-top: env(safe-area-inset-top); }
 
 .platform-ios.platform-cordova:not(.fullscreen) .bar-header {
-  padding-left: calc( constant(safe-area-inset-left) + 5px);
+  padding-left: calc( constant(safe-area-inset-left) + 5px);
   padding-left: calc(env(safe-area-inset-left) + 5px);
-  padding-right: calc( constant(safe-area-inset-right) + 5px);
-  padding-right: calc( env(safe-area-inset-right) + 5px); }
+  padding-right: calc( constant(safe-area-inset-right) + 5px);
+  padding-right: calc( env(safe-area-inset-right) + 5px); }
   .platform-ios.platform-cordova:not(.fullscreen) .bar-header .buttons:last-child {
     right: calc(constant(safe-area-inset-right) + 5px);
     right: calc(env(safe-area-inset-right) + 5px); }
@@ -10251,7 +10251,7 @@ h4 {
       color: #fff;
       line-height: 30px; }
 
-.home-contact-container .home-contact-sidebar {
+.home-contact-container .contact-sidebar {
   position: fixed;
   top: 70px;
   bottom: 50px;
@@ -10260,14 +10260,14 @@ h4 {
   display: flex;
   align-items: center;
   text-align: center; }
-  .home-contact-container .home-contact-sidebar ul.active {
+  .home-contact-container .contact-sidebar ul.active {
     background: black;
     border-radius: 10px;
     padding-top: 10px;
     padding-bottom: 10px; }
-  .home-contact-container .home-contact-sidebar ul {
+  .home-contact-container .contact-sidebar ul {
     width: 100%; }
-    .home-contact-container .home-contact-sidebar ul li {
+    .home-contact-container .contact-sidebar ul li {
       line-height: 30px; }
 
 .home-contact-container .current-index {
@@ -10281,3 +10281,30 @@ h4 {
   margin-left: -25px;
   margin-top: -25px;
   text-align: center; }
+
+.ptt-button-container {
+  position: fixed;
+  z-index: 100; }
+  .ptt-button-container button {
+    min-width: auto;
+    min-height: auto;
+    width: 96px;
+    height: 96px;
+    border-radius: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: none;
+    z-index: 100; }
+    .ptt-button-container button.default-button {
+      background-image: url("../img/icon/itrunk_ptt.png"); }
+    .ptt-button-container button.active-button {
+      background-image: url("../img/icon/itrunk_ptt_active.png"); }
+    .ptt-button-container button.pressed-button {
+      background-size: 92px 92px;
+      background-position: 2px 2px;
+      background-repeat: no-repeat; }
+    .ptt-button-container button.reject-button {
+      background-image: url("../img/icon/itrunk_ptt_reject.png"); }
+    .ptt-button-container button[disabled] {
+      opacity: 0.5; }

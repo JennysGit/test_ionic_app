@@ -32,25 +32,33 @@
       <ion-item class="item-divider">星标联系人</ion-item>
       <ion-item class="item-remove-animate item-avatar" ng-repeat="contact in starContacts" href="">
         <img src="img/icon/itrunk_user.png" />
-        <h2>{{contact.nick_name}}</h2>
+        <h2>{{contact.display_name}}</h2>
       </ion-item>
     </ion-list>
     <ion-list class="recent-contacts contacts-category-list" ng-if="recentContacts && recentContacts.length > 0">
       <ion-item class="item-divider"> 最近联系人</ion-item>
       <ion-item class="item-remove-animate item-avatar" ng-repeat="contact in recentContacts" type="item-text-wrap" href="">
         <img src="img/icon/itrunk_user.png" />
-        <h2>{{contact.nick_name}}</h2>
+        <h2>{{contact.display_name}}</h2>
       </ion-item>
     </ion-list>
-    <ion-list class="all-contacts contacts-category-list" ng-if="allContacts && allContacts.length > 0" ng-repeat="cateContacts in allContacts">
+    <!--  <ion-list class="all-contacts contacts-category-list" ng-if="allContacts && allContacts.length > 0" ng-repeat="cateContacts in allContacts">
       <ion-item id="contactIndex{{cateContacts.start}}" class="item-divider">{{cateContacts.start}}</ion-item>
       <ion-item class="item-remove-animate item-avatar" ng-repeat="contact in cateContacts.contacts" type="item-text-wrap" href="">
         <img src="img/icon/itrunk_user.png" />
-        <h2>{{contact.nick_name}}</h2>
+        <h2>{{contact.display_name}}</h2>
+      </ion-item>
+    </ion-list> -->
+    <ion-list class="all-contacts contacts-category-list" ng-if="allContacts && allContacts.length > 0" ng-repeat="(key, cateContacts) in allContacts | filterBy:['display_name']: searchText | groupBy: 'beginChar'">
+      <ion-item id="contactIndex{{cateContacts.start}}" class="item-divider">{{key}}</ion-item>
+      <ion-item class="item-remove-animate item-avatar" ng-repeat="contact in cateContacts" type="item-text-wrap" href="">
+        <img src="img/icon/itrunk_user.png" />
+        <h2>{{contact.display_name}}</h2>
       </ion-item>
     </ion-list>
   </ion-content>
-  <div class="side-bar home-contact-sidebar">
+  <contact-sidebar-index sidebar-list="sidebarList"></contact-sidebar-index>
+  <!-- <div class="side-bar home-contact-sidebar">
     <ul ng-class="{'active': !hideNum}">
       <li class="side-bar-item" ng-repeat="item in sidebarList" on-touch="goToIndex($event,item)" on-release="clearNum()" on-drag="moveIndex($event,item)">
         {{item}}
@@ -58,5 +66,5 @@
     </ul>
   </div>
   <div class="current-index" ng-hide="hideNum">
-    <h1>{{currentIndex}}</h1></div>
+    <h1>{{currentIndex}}</h1></div> -->
 </ion-view>

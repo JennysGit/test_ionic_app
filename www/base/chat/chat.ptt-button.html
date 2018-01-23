@@ -1,0 +1,4 @@
+<div class="ptt-button-container">
+  <button class="default-button" ng-class="{'active-button': isPttRecording && pttReject === 0, 'reject-button': isPttRecording && pttReject === 1, 'pressed-button': pressedButton }" on-touch="touchStart($event)" on-release="touchEnd($event)" on-drag="touchMove($event)" ng-disabled="disablePttButton">
+  </button>
+</div>

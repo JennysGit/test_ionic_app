@@ -23,8 +23,8 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 ion-item.item {
   color: white;
-  &.activated{
-    background:transparent;
+  &.activated {
+    background: transparent;
   }
   .icon {
     font-size: 25px;
@@ -82,6 +82,8 @@ ion-item.item {
     }
   }
 }
+
+
 
 
 
@@ -179,6 +181,8 @@ a:visited {
     border-radius: 15px;
   }
 }
+
+
 
 
 
@@ -408,6 +412,8 @@ h4 {
 
 
 
+
+
 /* Starts Server setting modal. */
 
 .modal.server-setting-modal {
@@ -507,6 +513,8 @@ h4 {
 
 
 
+
+
 /* End Server setting modal.  */
 
 .home-tab-nav {
@@ -528,6 +536,8 @@ h4 {
     }
   }
 }
+
+
 
 
 
@@ -674,7 +684,7 @@ h4 {
     }
   }
 
-  .home-contact-sidebar {
+  .contact-sidebar {
     ul.active {
       background: black;
       border-radius: 10px;
@@ -708,5 +718,42 @@ h4 {
     margin-left: -25px;
     margin-top: -25px;
     text-align: center;
+  }
+}
+
+.ptt-button-container {
+  position: fixed;
+  z-index: 100;
+  button {
+    min-width: auto;
+    min-height: auto;
+    width: 96px;
+    height: 96px;
+    border-radius: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: none;
+    z-index: 100;
+    &.default-button {
+      background-image: url('../img/icon/itrunk_ptt.png');
+    }
+
+    &.active-button {
+      background-image: url('../img/icon/itrunk_ptt_active.png');
+    }
+
+    &.pressed-button {
+      background-size: 92px 92px;
+      background-position: 2px 2px;
+      background-repeat: no-repeat;
+    }
+
+    &.reject-button {
+      background-image: url('../img/icon/itrunk_ptt_reject.png');
+    }
+    &[disabled] {
+      opacity: 0.5;
+    }
   }
 }

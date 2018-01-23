@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 
 
-angular.module('starter', ['ionic'])
+angular.module('starter', ['ionic', 'angular.filter'])
 
   .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -114,331 +114,157 @@ angular.module('starter', ['ionic'])
   })
   .controller('ResetPasswordController', function($scope, ) {})
   .controller('HomeContactController', function($scope, $filter, $ionicScrollDelegate) {
-    $scope.allContacts = allContacts();
-    $scope.orginAllContacts = angular.copy($scope.allContacts);
-    $scope.starContacts = starContacts();
-    $scope.recentContacts = recentContacts();
-    $scope.sidebarList = nameStartArray($scope.orginAllContacts);
+    $scope.hideNum = true;
+    initStarContacts();
+    initRecentContacts();
+    initAllContacts();
 
-    $scope.goToIndex = function($event, item) {
-      $event.preventDefault();
-      $scope.currentIndex = item;
-      $scope.hideNum = false;
-      var offsetTop = document.getElementById('contactIndex' + item).parentNode.offsetTop;
-      var scroll = $ionicScrollDelegate.getScrollPosition().top;
-      $ionicScrollDelegate.scrollBy(0, offsetTop - scroll, true);
-    }
-    $scope.clearNum = function() {
-      $scope.hideNum = true;
-    };
-    $scope.moveIndex = function($event, item) {
-      console.log($event);
-      //console.log(document.elementFromPoint($event.changedTouches[0].clientX, $event.changedTouches[0].clientY));
+    function initStarContacts() {
+      $scope.starContacts = [];
     }
 
-    $scope.$watch('searchText', function(val) {
-      if (val) {
-        $scope.allContacts = $filter('homeContactFilter')($scope.orginAllContacts, val);
-      } else {
-        $scope.allContacts = angular.copy($scope.orginAllContacts);
+    function initRecentContacts() {
+      $scope.recentContacts = [];
+    }
+
+    function initAllContacts() {
+      let startTime = Date.now();
+      let allContacts = getAllContacts();
+      let sidebarList = [];
+      console.log("getAllContacts", Date.now() - startTime);
+
+      allContacts.sort(sortCompare('fnpy'));
+
+      console.log("sort contacts", Date.now() - startTime);
+
+      for (let i = 0; i < allContacts.length; i++) {
+        let contact = allContacts[i];
+        let beginChar = contact.fnpy.charAt(0).toUpperCase();
+        if (!/[a-zA-Z]/.test(beginChar)) {
+          beginChar = '#';
+        }
+        contact.beginChar = beginChar;
+        if (sidebarList.indexOf(beginChar) == -1) {
+          sidebarList.push(beginChar);
+        }
       }
-    });
+      $scope.allContacts = allContacts;
+      $scope.sidebarList = sidebarList;
+      console.log("add begin char", Date.now() - startTime);
+      //console.log($scope.allContacts);
 
 
-    document.addEventListener('touchstart', '')
-
-    function allContacts() {
-      // private Long id;
-      // private String nick_name;
-      // private int province;
-      // private int city;
-      // private String location;
-      // private String description;
-      // private String img_small_url;
-      // private String img_large_url;
-      // private String img_hd_url;
-      // private String email;
-      // private String phone;
-      // private String gender;
-      var contacts = [{
-        id: 12345,
-        nick_name: 'Jenny',
-        pinyin_name: 'Jenny',
-        province: 51,
-        city: 1,
-        location: '',
-        description: '',
-        img_small_url: '',
-        img_large_url: '',
-        img_hd_url: '',
-        email: '1098739658@qq.com',
-        phone: '18200375970',
-        gender: '女'
-      }, {
-        id: 12345,
-        nick_name: '张晶',
-        pinyin_name: 'zhang jing',
-        province: 51,
-        city: 1,
-        location: '',
-        description: '',
-        img_small_url: '',
-        img_large_url: '',
-        img_hd_url: '',
-        email: '1098739658@qq.com',
-        phone: '18200375970',
-        gender: '女'
-      }, {
-        id: 12345,
-        nick_name: 'Zhang',
-        pinyin_name: 'Zhang',
-        province: 51,
-        city: 1,
-        location: '',
-        description: '',
-        img_small_url: '',
-        img_large_url: '',
-        img_hd_url: '',
-        email: '1098739658@qq.com',
-        phone: '18200375970',
-        gender: '女'
-      }, {
-        id: 12345,
-        nick_name: 'Jingzhang',
-        pinyin_name: 'Jingzhang',
-        province: 51,
-        city: 1,
-        location: '',
-        description: '',
-        img_small_url: '',
-        img_large_url: '',
-        img_hd_url: '',
-        email: '1098739658@qq.com',
-        phone: '18200375970',
-        gender: '女'
-      }, {
-        id: 12345,
-        nick_name: 'Jingzhang',
-        pinyin_name: 'Jingzhang',
-        province: 51,
-        city: 1,
-        location: '',
-        description: '',
-        img_small_url: '',
-        img_large_url: '',
-        img_hd_url: '',
-        email: '1098739658@qq.com',
-        phone: '18200375970',
-        gender: '女'
-      }, {
-        id: 12345,
-        nick_name: '曹操',
-        pinyin_name: 'cao cao',
-        province: 51,
-        city: 1,
-        location: '',
-        description: '',
-        img_small_url: '',
-        img_large_url: '',
-        img_hd_url: '',
-        email: '1098739658@qq.com',
-        phone: '18200375970',
-        gender: '女'
-      }, {
-        id: 12345,
-        nick_name: 'Jingzhang',
-        pinyin_name: 'Jingzhang',
-        province: 51,
-        city: 1,
-        location: '',
-        description: '',
-        img_small_url: '',
-        img_large_url: '',
-        img_hd_url: '',
-        email: '1098739658@qq.com',
-        phone: '18200375970',
-        gender: '女'
-      }, {
-        id: 12345,
-        nick_name: '陈丽',
-        pinyin_name: 'chen li',
-        province: 51,
-        city: 1,
-        location: '',
-        description: '',
-        img_small_url: '',
-        img_large_url: '',
-        img_hd_url: '',
-        email: '1098739658@qq.com',
-        phone: '18200375970',
-        gender: '女'
-      }, {
-        id: 12345,
-        nick_name: '王五',
-        pinyin_name: 'wang wu',
-        province: 51,
-        city: 1,
-        location: '',
-        description: '',
-        img_small_url: '',
-        img_large_url: '',
-        img_hd_url: '',
-        email: '1098739658@qq.com',
-        phone: '18200375970',
-        gender: '女'
-      }, {
-        id: 12345,
-        nick_name: 'Google',
-        pinyin_name: 'Google',
-        province: 51,
-        city: 1,
-        location: '',
-        description: '',
-        img_small_url: '',
-        img_large_url: '',
-        img_hd_url: '',
-        email: '1098739658@qq.com',
-        phone: '18200375970',
-        gender: '女'
-      }, {
-        id: 12345,
-        nick_name: 'Google',
-        pinyin_name: 'Google',
-        province: 51,
-        city: 1,
-        location: '',
-        description: '',
-        img_small_url: '',
-        img_large_url: '',
-        img_hd_url: '',
-        email: '1098739658@qq.com',
-        phone: '18200375970',
-        gender: '女'
-      }, {
-        id: 12345,
-        nick_name: 'Google',
-        pinyin_name: 'Google',
-        province: 51,
-        city: 1,
-        location: '',
-        description: '',
-        img_small_url: '',
-        img_large_url: '',
-        img_hd_url: '',
-        email: '1098739658@qq.com',
-        phone: '18200375970',
-        gender: '女'
-      }, {
-        id: 12345,
-        nick_name: 'Google',
-        pinyin_name: 'Google',
-        province: 51,
-        city: 1,
-        location: '',
-        description: '',
-        img_small_url: '',
-        img_large_url: '',
-        img_hd_url: '',
-        email: '1098739658@qq.com',
-        phone: '18200375970',
-        gender: '女'
-      }];
-
-      var formatedContacts = formatContacts(contacts);
-      return formatedContacts;
-    };
-
-    function starContacts() {
-      var starContacts = [{
-        id: 12345,
-        nick_name: 'Jenny',
-        province: 51,
-        city: 1,
-        location: '',
-        description: '',
-        img_small_url: '',
-        img_large_url: '',
-        img_hd_url: '',
-        email: '1098739658@qq.com',
-        phone: '18200375970',
-        gender: '女'
-      }];
-      return starContacts;
-    };
-
-    function recentContacts() {
-      var recentContacts = [{
-        id: 12345,
-        nick_name: 'Jenny',
-        province: 51,
-        city: 1,
-        location: '',
-        description: '',
-        img_small_url: '',
-        img_large_url: '',
-        img_hd_url: '',
-        email: '1098739658@qq.com',
-        phone: '18200375970',
-        gender: '女'
-      }];
-      return recentContacts;
+      function sortCompare(property) {
+        return function(obj1, obj2) {
+          var a = obj1[property].toUpperCase();
+          var b = obj2[property].toUpperCase();
+          if (a > b) {
+            return 1;
+          } else if (a < b) {
+            return -1
+          }
+          return 0;
+        }
+      }
     }
 
-    function nameStartArray(contacts) {
-      var startArr = [];
-      contacts.forEach(function(item) {
-        startArr.push(item.start);
-      });
-      return startArr;
-    };
+    function getAllContacts() {
+      var contacts = [{
+          uid: 1,
+          display_name: 'jenny',
+          fnpy: 'jenny',
+          img_url: ''
+        },
+        {
+          uid: 2,
+          display_name: '张晶',
+          fnpy: 'zhang jing',
+          phone: "19900001041",
+          rank: 0,
+          img_url: ''
+        },
+        {
+          uid: 3,
+          display_name: '张成',
+          fnpy: 'zhang cheng',
+          phone: "19900001041",
+          rank: 0,
+          img_url: ''
+        },
+        {
+          uid: 4,
+          display_name: 'lily',
+          rank: 0,
+          fnpy: 'lily',
+          phone: "19900001041",
+          img_url: ''
+        }
+      ];
 
-    function formatContacts(contacts) {
-      //var pinyinContacts = getPinYinContacts(contacts);
-      var sortedContacts = contacts.sort(sortCompare('pinyin_name'));
-      var formatContacts = [];
+      for (var i = 0; i < 20; i++) {
+        if (i % 5 == 0) {
+          contacts.push({
+            "display_name": "D" + i,
+            "fnpy": 'd' + i,
+            "img_url": null,
+            "phone": "19900001041",
+            "rank": 0,
+            "state": 1,
+            "ts": 2,
+            "uid": 66580
+          });
+        } else if (i % 5 == 1) {
+          contacts.push({
+            "display_name": "A" + i,
+            "fnpy": 'a' + i,
+            "img_url": null,
+            "phone": "19900001041",
+            "rank": 0,
+            "state": 1,
+            "ts": 2,
+            "uid": 66580
+          });
+        } else if (i % 5 == 2) {
+          contacts.push({
+            "display_name": "C" + i,
+            "fnpy": 'c' + i,
+            "img_url": null,
+            "phone": "19900001041",
+            "rank": 0,
+            "state": 1,
+            "ts": 2,
+            "uid": 66580
+          });
+        } else if (i % 5 == 3) {
+          contacts.push({
+            "display_name": "L" + i,
+            "fnpy": 'l' + i,
+            "img_url": null,
+            "phone": "19900001041",
+            "rank": 0,
+            "state": 1,
+            "ts": 2,
+            "uid": 66580
+          });
 
-      for (var i = 0; i < sortedContacts.length; i++) {
-        var curContact = sortedContacts[i];
-        var firstChr = getFirstNumber(curContact.pinyin_name);
-        if (hasContacts(formatContacts, firstChr)) {
-          var len = formatContacts.length;
-          formatContacts[len - 1].contacts.push(curContact);
         } else {
-          formatContacts.push({
-            start: firstChr,
-            contacts: [curContact]
+          contacts.push({
+            "display_name": "X" + i,
+            "fnpy": 'x' + i,
+            "img_url": null,
+            "phone": "19900001041",
+            "rank": 0,
+            "state": 1,
+            "ts": 2,
+            "uid": 66580,
+            "starts": 'X'
           });
         }
       }
-      return formatContacts;
+
+      return contacts
     }
 
-    function hasContacts(contacts, chr) {
-      var filtered = contacts.filter(function(contact) {
-        var firstChr = getFirstNumber(contact.start);
-        return firstChr === chr;
-      });
-      return filtered.length > 0;
-    }
-
-    function getFirstNumber(str) {
-      return str.substr(0, 1).toUpperCase();
-    }
-
-    function sortCompare(property) {
-      return function(obj1, obj2) {
-        return obj1[property].toUpperCase() > obj2[property].toUpperCase();
-      }
-    }
-
-    function getPinYinContacts(contacts) {
-      contacts.forEach(function(contact) {
-        contact.pinyin_name = pinyin(contact.nick_name, {
-          style: pinyin.STYLE_NORMAL
-        }).join(' ');
-      });
-      return contacts;
-    }
   })
   .controller('HomeGroupController', function($scope) {
 
@@ -456,6 +282,9 @@ angular.module('starter', ['ionic'])
       $scope.versionModal.upgradeVersion = true;
       //$scope.versionModal.show();
     });
+  })
+  .controller('ChatController', function($scope) {
+
   })
   .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -484,10 +313,12 @@ angular.module('starter', ['ionic'])
       .state('home', {
         url: '/home',
         cache: true,
+        abstract: true,
         templateUrl: 'base/home/home.html'
       })
       .state('home.contact', {
         url: '/contact',
+        cache: true,
         views: {
           'home-contact': {
             templateUrl: 'base/home/home.contact.html',
@@ -519,6 +350,11 @@ angular.module('starter', ['ionic'])
         templateUrl: 'base/setting/setting.html',
         controller: 'SettingController'
       })
+      .state('chat', {
+        url: '/chat/:userId/:chatType/:usercall',
+        templateUrl: 'base/chat/chat.html',
+        controller: 'ChatController'
+      })
 
     $urlRouterProvider.otherwise('/login');
   })
@@ -547,7 +383,7 @@ angular.module('starter', ['ionic'])
   .directive('downloadModal', function($ionicModal, $interval) {
     return {
       restrict: 'E',
-      scope:{},
+      scope: {},
       template: `<script id="download-progress-modal.html" type="text/ng-template">
                   <div class="modal down-load-progress-modal">
                     <div class="down-load-progress-modal-content">
@@ -558,7 +394,7 @@ angular.module('starter', ['ionic'])
                     </div>
                   </div>
                 </script>`,
-      link: function(scope,  eles, attrs) {
+      link: function(scope, eles, attrs) {
 
         $ionicModal.fromTemplateUrl('download-progress-modal.html', {
           scope: scope
@@ -577,5 +413,149 @@ angular.module('starter', ['ionic'])
           }, 100);
         });
       }
+    }
+  })
+  .directive('contactSidebarIndex', function($window, $ionicScrollDelegate) {
+    return {
+      restrict: 'E',
+      template: `<div class="side-bar contact-sidebar">
+                    <ul ng-class="{'in-press': showCurrentNumber}">
+                       <li ng-repeat="item in sidebarList" on-touch="touchStart($event,item);" on-release="touchEnd($event);" on-drag="touchMove($event, item);" id="{{item}}">
+                        {{item}}
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="current-show-number" ng-show="showCurrentNumber">
+                    <h1>{{currentNumber}}</h1>
+                  </div>
+                  `,
+      scope: {
+        sidebarList: '='
+      },
+      link: function(scope, eles, attrs) {
+        scope.showCurrentNumber = false;
+        scope.currentNumber = "";
+        var width = $window.innerWidth - 10;
+
+        scope.goToIndex = function(item) {
+          if (item === '*') {
+            $ionicScrollDelegate.scrollTop();
+          } else {
+            var itemOffsetTop = document.getElementById("contactIndex" + item).parentNode.offsetTop;
+            var scrollOffsetTop = $ionicScrollDelegate.getScrollPosition().top;
+            $ionicScrollDelegate.scrollBy(0, itemOffsetTop - scrollOffsetTop);
+          }
+        };
+
+        scope.touchStart = function($event, item) {
+          $event.stopPropagation();
+          scope.showCurrentNumber = true;
+          scope.currentNumber = item;
+          //$ionicScrollDelegate.freezeScroll(true);
+          scroll(item);
+        };
+        scope.touchMove = function($event) {
+          $event.stopPropagation();
+          var elem = document.elementFromPoint(width, $event.gesture.center.pageY);
+          var elemText = elem ? elem.innerText : '';
+          if (elemText && elemText.length == 1 && scope.sidebarList.indexOf(elemText) > -1) {
+            scope.currentNumber = elemText;
+            scroll(elemText);
+          }
+        };
+        scope.touchEnd = function($event) {
+          $event.stopPropagation();
+          scope.showCurrentNumber = false;
+        };
+
+        function scroll(item) {
+          var instance = null;
+
+          for (let i = 0; i < $ionicScrollDelegate["_instances"].length; i++) {
+            var currentInstance = $ionicScrollDelegate["_instances"][i];
+            if (currentInstance.$element[0].id == attrs.scrollId && currentInstance.$element[0].clientHeight > 0) {
+              var instance = currentInstance;
+              break;
+            }
+          }
+
+          if (item === '*') {
+            instance.scrollTop();
+          } else {
+            var itemOffsetTop = document.getElementById("contactIndex" + item).parentNode.offsetTop;
+            var scrollOffsetTop = instance.getScrollPosition().top;
+            instance.scrollBy(0, itemOffsetTop - scrollOffsetTop);
+          }
+        }
+      }
+    }
+  })
+  .directive('chatPttButton', function($window) {
+    return {
+      restrict: 'E',
+      replace: true,
+      scope: {
+
+      },
+      templateUrl: 'base/chat/chat.ptt-button.html',
+      link: function(scope, elem, attrs) {
+        elem.css('left', '5px').css('bottom', '50px');
+        let movingPttButton = false;
+        scope.isPttRecording = false;
+        scope.pttReject = false;
+
+        const dragElem = {
+          width: 96,
+          height: 96, // 元素的宽高
+          bottomOffsetMin: 5,
+          leftOfssetMin: 5,
+          bottomOffsetMax: $window.innerHeight - 101,
+          leftOfssetMax: $window.innerWidth - 101,
+        };
+
+        let elemCoords = {
+          left: 5,
+          bottom: 50
+        }
+
+        scope.touchStart = function($event) {
+          console.log($event.gesture);
+
+          if ($event.gesture.touches.length == 1) {
+            // 发送ptt语音
+            movingPttButton = false;
+            scope.isPttRecording = true;
+            scope.pttReject = 1;
+          } else {
+            // 移动ptt按钮
+            movingPttButton = true;
+          }
+        }
+
+        scope.touchMove = function($event) {
+          if (movingPttButton) {
+            let left = elemCoords.left + $event.gesture.deltaX;
+            let bottom = elemCoords.bottom - $event.gesture.deltaY;
+
+            if (left > dragElem.leftOfssetMin && left < dragElem.leftOfssetMax) {
+              elem.css('left', left + 'px');
+            }
+            if (bottom > dragElem.bottomOffsetMin && bottom < dragElem.bottomOffsetMax) {
+              elem.css('bottom', bottom + 'px');
+            }
+          }
+        }
+
+        scope.touchEnd = function($event) {
+          console.log("touch end");
+          scope.isPttRecording = false;
+          scope.pttReject = 0;
+        }
+      }
+    }
+  })
+  .filter('homeContactFilter', function() {
+    return function(item, model) {
+      console.log("homeContactFilter", item, model);
     }
   });
