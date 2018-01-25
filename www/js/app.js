@@ -53,7 +53,7 @@ angular.module('starter', ['ionic', 'angular.filter'])
 
       $timeout(function() {
         $ionicLoading.hide();
-        $state.go('home');
+        $state.go('home.group');
       }, 1000)
       // $ionicLoading.show({
       //   template: 'Loading...',
@@ -118,6 +118,8 @@ angular.module('starter', ['ionic', 'angular.filter'])
     initStarContacts();
     initRecentContacts();
     initAllContacts();
+
+    console.log("home contact reload.")
 
     function initStarContacts() {
       $scope.starContacts = [];
@@ -283,8 +285,22 @@ angular.module('starter', ['ionic', 'angular.filter'])
       //$scope.versionModal.show();
     });
   })
-  .controller('ChatController', function($scope) {
+  .controller('ChatController', function($scope, $timeout, $state, $stateParams, $ionicHistory, $window) {
 
+    $scope.callEnter = function() {
+      $state.go('chat', { userId: 87878, chatType: 'user', usercall: 87878 }, { location: 'replace' });
+    }
+
+
+
+    if ($stateParams.usercall && parseInt($stateParams.usercall)) {
+      $scope.usercall = parseInt($stateParams.usercall);
+      $timeout(function() {
+        // $ionicHistory.goBack(-2);
+        $window.history.back();
+      }, 3000);
+
+    }
   })
   .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -400,7 +416,7 @@ angular.module('starter', ['ionic', 'angular.filter'])
           scope: scope
         }).then(function(downloadModal) {
           scope.downloadModal = downloadModal;
-          scope.downloadModal.show();
+          // scope.downloadModal.show();
           scope.progressValue = 0;
 
 

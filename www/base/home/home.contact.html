@@ -37,7 +37,7 @@
     </ion-list>
     <ion-list class="recent-contacts contacts-category-list" ng-if="recentContacts && recentContacts.length > 0">
       <ion-item class="item-divider"> 最近联系人</ion-item>
-      <ion-item class="item-remove-animate item-avatar" ng-repeat="contact in recentContacts" type="item-text-wrap" href="">
+      <ion-item class="item-remove-animate item-avatar" ng-repeat="contact in recentContacts" type="item-text-wrap" href="chat/{{contact.uid}}/user/1">
         <img src="img/icon/itrunk_user.png" />
         <h2>{{contact.display_name}}</h2>
       </ion-item>
@@ -51,7 +51,7 @@
     </ion-list> -->
     <ion-list class="all-contacts contacts-category-list" ng-if="allContacts && allContacts.length > 0" ng-repeat="(key, cateContacts) in allContacts | filterBy:['display_name']: searchText | groupBy: 'beginChar'">
       <ion-item id="contactIndex{{cateContacts.start}}" class="item-divider">{{key}}</ion-item>
-      <ion-item class="item-remove-animate item-avatar" ng-repeat="contact in cateContacts" type="item-text-wrap" href="">
+      <ion-item class="item-remove-animate item-avatar" ng-repeat="contact in cateContacts" type="item-text-wrap"  href="#/chat/user/{{contact.uid}}/0">
         <img src="img/icon/itrunk_user.png" />
         <h2>{{contact.display_name}}</h2>
       </ion-item>
