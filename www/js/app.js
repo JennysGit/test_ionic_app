@@ -302,7 +302,7 @@ angular.module('starter', ['ionic', 'angular.filter'])
 
     }
   })
-  .config(function($stateProvider, $urlRouterProvider) {
+  .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
     $stateProvider
       .state('login', {
         url: "/login",
@@ -373,6 +373,7 @@ angular.module('starter', ['ionic', 'angular.filter'])
       })
 
     $urlRouterProvider.otherwise('/login');
+    $ionicConfigProvider.tabs.position('bottom');
   })
   .directive('alertErrorMessage', function() {
     return {

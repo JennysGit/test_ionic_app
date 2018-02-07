@@ -15,6 +15,7 @@ $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
 
+// $positive:                        #3793e3 !default;
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
@@ -83,23 +84,21 @@ ion-item.item {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.bar-header {
+  img.logo {
+    margin-top: 2px;
+    margin-left: 10px;
+    height: 30px;
+  }
+  h1.title {
+    font-size: 16px;
+    text-align: left;
+    &.home-title {
+      padding-left: 65px;
+      left: 0 !important;
+    }
+  }
+}
 
 
 
@@ -110,7 +109,7 @@ ion-item.item {
 
 /* Empty. Add your own CSS if you like */
 
-$main-background-color: #1E2F37;
+$main-background-color: #142c66;
 
 
 body {
@@ -121,18 +120,20 @@ body {
   background-color: transparent;
 }
 
-.scroll-content,
-.ionic-scroll {
-  background-color: $main-background-color
+// .scroll-content,
+// .ionic-scroll {
+//   background-color: $main-background-color
+// }
+.login-view {
+  background: url('../img/login_background.jpg');
 }
 
-.login-container {
-  &.pane,
-  &.view {
-    background-color: $main-background-color
-  }
-}
-
+// .login-container {
+//   &.pane,
+//   &.view {
+//     background-color: $main-background-color
+//   }
+// }
 img {
   max-width: 100%;
 }
@@ -153,7 +154,7 @@ img {
 
 
 .button.button-positive {
-  background-color: #0093e3;
+  background-color: #3793e3;
 }
 
 
@@ -211,11 +212,21 @@ a:visited {
 
 
 
+
+
+
+
+
+
+
+
 /* Start Login css */
 
 $headerBG:#1A1927;
 $mainColor: #fff;
-$mainModalBGColor:rgb(0, 147, 227);
+$mainModalBGColor:rgb(0,
+147,
+227);
 
 .input-inline-divider {
   display: inline-block;
@@ -414,6 +425,14 @@ h4 {
 
 
 
+
+
+
+
+
+
+
+
 /* Starts Server setting modal. */
 
 .modal.server-setting-modal {
@@ -515,6 +534,14 @@ h4 {
 
 
 
+
+
+
+
+
+
+
+
 /* End Server setting modal.  */
 
 .home-tab-nav {
@@ -536,6 +563,14 @@ h4 {
     }
   }
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -754,6 +789,26 @@ h4 {
     }
     &[disabled] {
       opacity: 0.5;
+    }
+  }
+}
+
+.home-funcbox-container {
+  .scroll{
+    padding-top: 15px;
+  }
+  .row {
+    text-align: center;
+    .col {
+      padding: 10px 22px;
+      a.activated {
+        opacity: 0.9;
+      }
+      span {
+        display: block;
+        margin-top: 5px;
+        margin-bottom: 10px;
+      }
     }
   }
 }

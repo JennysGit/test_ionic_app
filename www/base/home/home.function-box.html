@@ -1,13 +1,68 @@
-<ion-view view-title="功能箱">
-  <div class="bar bar-header bar-positive">
-    <h1 class="title">功能箱</h1>
-  </div>
+<ion-view view-title="功能箱" class="home-funcbox-container">
+  <ion-header-bar class="bar-positive" align-title="center">
+    <img class="logo" src="img/icon/itrunk_logo_big2.png" alt="logo">
+    <h1 class="title home-title">四川监狱移动指挥调度系统</h1>
+  </ion-header-bar>
   <ion-content>
-    <!-- <ion-list>
-    <ion-toggle  ng-model="settings.enableFriends">
-        Enable Friends
-    </ion-toggle>
-    </ion-list> -->
-    功能箱
+    <div class="row">
+      <div class="col">
+        <a href="" ng-click="showTakePhotoModal = true">
+          <img src="img/icon/itrunk_take_picture.png" alt="">
+          <span>拍传照片</span>
+        </a>
+      </div>
+      <div class="col">
+        <a href="">
+          <img src="img/icon/itrunk_video.png" alt="">
+          <span style="color: gray;">拍传视频</span>
+        </a>
+      </div>
+      <div class="col">
+        <a href="tel:">
+          <img src="img/icon/itrunk_call.png" alt="">
+          <span>拨打电话</span>
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <a href="">
+          <img src="img/icon/itrunk_rel_video.png" alt="">
+          <span style="color: gray;">实时视频</span>
+        </a>
+      </div>
+      <div class="col">
+        <a href="">
+          <img src="img/icon/itrunk_local_video.png" alt="">
+          <span style="color: gray;">本地视频</span>
+        </a>
+      </div>
+      <div class="col">
+        <a href="">
+          <img src="img/icon/itrunk_local_picture.png" alt="">
+          <span style="color: gray;">本地照片</span>
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <a href="">
+          <img src="img/icon/itrunk_alert.png" alt="">
+          <span>一键告警</span>
+        </a>
+      </div>
+      <div class="col">
+        <a href="">
+          <img src="img/icon/itrunk_add_group.png" alt="">
+          <span>新建群组</span>
+        </a>
+      </div>
+      <div class="col">
+        <a href="">
+          <img src="img/icon/itrunk_record_upload.png" alt="">
+          <span style="color: gray;">录音回传</span>
+        </a>
+      </div>
+    </div>
   </ion-content>
 </ion-view>

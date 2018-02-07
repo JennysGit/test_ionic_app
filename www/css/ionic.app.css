@@ -9920,19 +9920,27 @@ ion-item.item {
       position: relative;
       top: -5px; }
 
+.bar-header img.logo {
+  margin-top: 2px;
+  margin-left: 10px;
+  height: 30px; }
+
+.bar-header h1.title {
+  font-size: 16px;
+  text-align: left; }
+  .bar-header h1.title.home-title {
+    padding-left: 65px;
+    left: 0 !important; }
+
 /* Empty. Add your own CSS if you like */
 body {
-  background-color: #1E2F37; }
+  background-color: #142c66; }
 
 .pane {
   background-color: transparent; }
 
-.scroll-content,
-.ionic-scroll {
-  background-color: #1E2F37; }
-
-.login-container.pane, .login-container.view {
-  background-color: #1E2F37; }
+.login-view {
+  background: url("../img/login_background.jpg"); }
 
 img {
   max-width: 100%; }
@@ -9948,7 +9956,7 @@ img {
   background: transparent; }
 
 .button.button-positive {
-  background-color: #0093e3; }
+  background-color: #3793e3; }
 
 a,
 a:link,
@@ -10308,3 +10316,17 @@ h4 {
       background-image: url("../img/icon/itrunk_ptt_reject.png"); }
     .ptt-button-container button[disabled] {
       opacity: 0.5; }
+
+.home-funcbox-container .scroll {
+  padding-top: 15px; }
+
+.home-funcbox-container .row {
+  text-align: center; }
+  .home-funcbox-container .row .col {
+    padding: 10px 22px; }
+    .home-funcbox-container .row .col a.activated {
+      opacity: 0.9; }
+    .home-funcbox-container .row .col span {
+      display: block;
+      margin-top: 5px;
+      margin-bottom: 10px; }
