@@ -266,13 +266,239 @@ angular.module('starter', ['ionic', 'angular.filter'])
 
       return contacts
     }
-
+    $scope.test = function() {
+      console.log("test");
+    }
   })
   .controller('HomeGroupController', function($scope) {
 
   })
-  .controller('HomeFuncboxController', function($scope) {
+  .controller('HomeFuncboxController', function($scope, $ionicModal, $ionicHistory, $ionicSlideBoxDelegate) {
+    $scope.activeSlideIndex = 0;
+    $ionicModal.fromTemplateUrl('video-modal-view.html', {
+      $scope: $scope,
+    }).then(function(modal) {
+      $scope.modal = modal;
+      $scope.modal.show();
 
+      $scope.modal.shareVideo = function() {
+        $scope.distributeModal.show();
+      };
+
+    });
+
+    $ionicModal.fromTemplateUrl('video-distribute-view.html', {
+      $scope: $scope,
+      animation: 'slide-in-right'
+    }).then(function(modal) {
+      $scope.distributeModal = modal;
+
+      $scope.distributeModal.contactList = getUserList();
+      $scope.distributeModal.groupList = getGroupList();
+      console.log($scope.distributeModal.contactList);
+
+      // $scope.distributeModal.show();
+    });
+    $scope.test = function() {
+      console.log("func test");
+    }
+
+    $scope.goSlide = function(index) {
+      $ionicSlideBoxDelegate.$getByHandle('localPictureSlide').slide(index);
+      $scope.activeSlideIndex = index;
+    }
+
+    $scope.slideHasChanged = function(index) {
+      $scope.activeSlideIndex = index;
+    }
+
+    function getUserList() {
+      return [{
+          "admin": 0,
+          "dcgid": 65577,
+          "default_grp": 0,
+          "display_name": "u41",
+          "img_url": null,
+          "lmr_uid": null,
+          "oc": 0,
+          "orgid": 1,
+          "phone": "19900000041",
+          "preconfig": 1,
+          "priority": 1,
+          "rank": 0,
+          "state": 1,
+          "ts": 2,
+          "type": "web",
+          "uid": 65577
+        },
+        {
+          "admin": 0,
+          "dcgid": 66577,
+          "default_grp": 0,
+          "display_name": "19900000041",
+          "img_url": null,
+          "lmr_uid": null,
+          "oc": 0,
+          "orgid": 1,
+          "phone": "19900001041",
+          "preconfig": 1,
+          "priority": 1,
+          "rank": 0,
+          "state": 1,
+          "ts": 2,
+          "type": "web",
+          "uid": 66578,
+          "starts": '#'
+        },
+        {
+          "admin": 0,
+          "dcgid": 66579,
+          "default_grp": 0,
+          "display_name": "19900000043",
+          "img_url": null,
+          "lmr_uid": null,
+          "oc": 0,
+          "orgid": 1,
+          "phone": "19900001041",
+          "preconfig": 1,
+          "priority": 1,
+          "rank": 0,
+          "state": 1,
+          "ts": 2,
+          "type": "web",
+          "uid": 66579,
+          "starts": '#'
+        },
+        {
+          "admin": 0,
+          "dcgid": 66577,
+          "default_grp": 0,
+          "display_name": "1233",
+          "img_url": null,
+          "lmr_uid": null,
+          "oc": 0,
+          "orgid": 1,
+          "phone": "19900001041",
+          "preconfig": 1,
+          "priority": 1,
+          "rank": 3,
+          "state": 1,
+          "ts": 2,
+          "type": "web",
+          "uid": 66570,
+          "starts": '#'
+        },
+        {
+          "admin": 0,
+          "dcgid": 66580,
+          "default_grp": 0,
+          "display_name": "34434343",
+          "img_url": null,
+          "lmr_uid": null,
+          "oc": 0,
+          "orgid": 1,
+          "phone": "19900001041",
+          "preconfig": 1,
+          "priority": 1,
+          "rank": 0,
+          "state": 1,
+          "ts": 2,
+          "type": "web",
+          "uid": 66580,
+          "starts": '#'
+        }
+      ];
+    }
+
+    function getGroupList() {
+      var data = {
+        "ret": 0,
+        "tginfolist": [{
+            "tg_name": "dcg4002",
+            "uids": [
+              69538
+            ],
+            "tg_owner_id": 69538,
+            "tgid": 69538,
+            "rank": 0,
+            "dcg": 1,
+            "state": 1,
+            "tg_right": 1,
+            "preconfig": 1,
+            "ts": 2
+          },
+          {
+            "tg_name": "TG1",
+            "uids": [
+              69537,
+              69538,
+              69558,
+              69588,
+              69589
+            ],
+            "tg_owner_id": 69537,
+            "tgid": 74729,
+            "rank": 0,
+            "dcg": 0,
+            "state": 1,
+            "tg_right": 1,
+            "preconfig": 1,
+            "ts": 7
+          },
+          {
+            "tg_name": "TA",
+            "uids": [
+              69538,
+              69558
+            ],
+            "tg_owner_id": 0,
+            "tgid": 74793,
+            "rank": 0,
+            "dcg": 0,
+            "state": 1,
+            "tg_right": 1,
+            "preconfig": 1,
+            "ts": 4
+          },
+          {
+            "tg_name": "TG2",
+            "uids": [
+              69538,
+              69539,
+              69540,
+              69589
+            ],
+            "tg_owner_id": 69539,
+            "tgid": 74730,
+            "rank": 0,
+            "dcg": 0,
+            "state": 1,
+            "tg_right": 1,
+            "preconfig": 1,
+            "ts": 6
+          },
+          {
+            "tg_name": "国家两千人计划",
+            "uids": [
+              65537,
+              65538,
+              65706,
+              6570
+            ],
+            "tg_owner_id": 0,
+            "tgid": 74867,
+            "rank": 0,
+            "dcg": 0,
+            "state": 1,
+            "tg_right": 1,
+            "preconfig": 1,
+            "ts": 17
+          }
+        ]
+      }
+
+      return data.tginfolist;
+    }
   })
   .controller('SettingController', function($scope, $ionicModal) {
     //verison-modal.html
@@ -291,8 +517,6 @@ angular.module('starter', ['ionic', 'angular.filter'])
       $state.go('chat', { userId: 87878, chatType: 'user', usercall: 87878 }, { location: 'replace' });
     }
 
-
-
     if ($stateParams.usercall && parseInt($stateParams.usercall)) {
       $scope.usercall = parseInt($stateParams.usercall);
       $timeout(function() {
@@ -300,6 +524,22 @@ angular.module('starter', ['ionic', 'angular.filter'])
         $window.history.back();
       }, 3000);
 
+    }
+  })
+  .controller('LocalPictureController', function($scope, $ionicSlideBoxDelegate, $ionicHistory, $state) {
+    $scope.activeSlideIndex = 0;
+
+    $scope.back = function() {
+      //$ionicHistory.goBack();
+      $state.go('home.funcbox');
+    }
+    $scope.goSlide = function(index) {
+      $ionicSlideBoxDelegate.$getByHandle('localPictureSlide').slide(index);
+      $scope.activeSlideIndex = index;
+    }
+
+    $scope.slideHasChanged = function(index) {
+      $scope.activeSlideIndex = index;
     }
   })
   .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
@@ -370,6 +610,11 @@ angular.module('starter', ['ionic', 'angular.filter'])
         url: '/chat/:userId/:chatType/:usercall',
         templateUrl: 'base/chat/chat.html',
         controller: 'ChatController'
+      })
+      .state('localPicture', {
+        url: '/localPicture',
+        templateUrl: 'base/home/local.picture.html',
+        controller: 'LocalPictureController'
       })
 
     $urlRouterProvider.otherwise('/login');

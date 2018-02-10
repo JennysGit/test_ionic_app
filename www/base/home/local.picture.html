@@ -1,0 +1,38 @@
+<ion-view view-title="照片管理" class="local-picture-container slide-page-container">
+  <ion-header-bar class="bar-positive" align-title="center">
+    <button class="button button-positive" ng-click="back()">
+      <i class="icon ion-arrow-left-a"></i>
+    </button>
+    <h1 class="title title-left">照片管理</h1>
+  </ion-header-bar>
+  <ion-header-bar class="bar-subheader bar-positive tab-bar">
+    <div class="manage-item">
+      <button class="button button-clear" ng-class="{'active': activeSlideIndex == 0}" ng-click="goSlide(0)">照片</button>
+    </div>
+    <div class="manage-item">
+      <button class="button button-clear" ng-class="{'active': activeSlideIndex == 1}" ng-click="goSlide(1)">截屏</button>
+    </div>
+    <div class="manage-item">
+      <button class="button button-clear" ng-class="{'active': activeSlideIndex == 2}" ng-click="goSlide(2)">下载</button>
+    </div>
+  </ion-header-bar>
+  <ion-content scroll="false">
+    <ion-slide-box active-slide="activeSlideIndex" on-slide-changed="slideHasChanged($index)" show-pager="false" delegate-handle="localPictureSlide">
+      <ion-slide>
+        <div class="box">
+          <p class="no-file">没有本地文件(照片)</p>
+        </div>
+      </ion-slide>
+      <ion-slide>
+        <div class="box ">
+          <p class="no-file">没有本地文件(截屏)</p>
+        </div>
+      </ion-slide>
+      <ion-slide>
+        <div class="box">
+          <p class="no-file">没有本地文件(下载)</p>
+        </div>
+      </ion-slide>
+    </ion-slide-box>
+  </ion-content>
+</ion-view>
