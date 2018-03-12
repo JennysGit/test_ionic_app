@@ -10486,3 +10486,22 @@ h4 {
 .slide-in-right > .ng-leave {
   -webkit-transition: all ease-in-out 250ms;
   transition: all ease-in-out 250ms; }
+
+.backdrop-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  z-index: 10; }
+
+span.has-message {
+  display: inline-block;
+  position: absolute;
+  left: 39px;
+  width: 8px;
+  height: 8px;
+  background: #fe7402;
+  border-radius: 100%;
+  top: 8px; }

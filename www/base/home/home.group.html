@@ -1,13 +1,14 @@
 <ion-view view-title="通话组">
-  <ion-header>
-    <div class="bar bar-header bar-positive">
+  <ion-header  class="bar bar-header bar-positive">
+    <div>
       <button class="button left-logo-container" ng-click="$parent.modal.show()">
         <img class="logo" src="img/icon/itrunk_logo_big2.png" alt="logo">
       </button>
       <h1 class="title home-title title-center">四川监狱移动指挥调度系统</h1>
     </div>
   </ion-header>
-  <ion-content>
+  <ion-content class="tabs-content">
     <p>通话组</p>
+    <button class="button" on-double-tap="doubleTap()">double tap</button>
   </ion-content>
 </ion-view>

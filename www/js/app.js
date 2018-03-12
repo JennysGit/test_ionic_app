@@ -112,8 +112,27 @@ angular.module('starter', ['ionic', 'angular.filter'])
     // });
 
   })
+  .controller('HomeController', function($scope, $ionicGesture) {
+    $scope.doubleTap = function() {
+      console.log("hello")
+    }
+    let homeTab = document.getElementsByClassName('home-tab-nav')[0];
+    let ngHomeTab = angular.element(homeTab);
+    console.log(ngHomeTab)
+    $ionicGesture.on('doubletap', function(event) {
+      // console.log(event)
+      let targetUrl = event.target.baseURI;
+      if (targetUrl.indexOf('/home/contact') > -1) {
+        console.log("home contact db click")
+        $scope.$broadcast('contactTabDoubleTap')
+      } else if (targetUrl.indexOf('/home/group') > -1) {
+        console.log("home group db click")
+      }
+    }, ngHomeTab)
+
+  })
   .controller('ResetPasswordController', function($scope, ) {})
-  .controller('HomeContactController', function($scope, $filter, $ionicScrollDelegate) {
+  .controller('HomeContactController', function($scope, $filter, $timeout, $ionicGesture, $state, $ionicScrollDelegate) {
     $scope.hideNum = true;
     initStarContacts();
     initRecentContacts();
@@ -121,12 +140,63 @@ angular.module('starter', ['ionic', 'angular.filter'])
 
     console.log("home contact reload.")
 
+    $scope.$on('contactTabDoubleTap', function($event) {
+      let targetElem = document.getElementsByClassName('has-message')[0];
+      let itemNode = targetElem.parentNode.parentNode;
+      let listNode = itemNode.parentNode;
+      var elemOffsetTop = itemNode.offsetTop + listNode.offsetTop
+      console.log(elemOffsetTop)
+      var scroll = $ionicScrollDelegate.$getByHandle('homeContactContent');
+      var scrollOffsetTop = scroll.getScrollPosition().top;
+      scroll.scrollBy(0, elemOffsetTop - scrollOffsetTop);
+      // $ionicScrollDelegate.$getByHandle('homeContactContent').scrollBottom();
+    })
+
+    $scope.$on('$ionicView.afterEnter', function() {
+      let tabContentEles = angular.element(document.getElementById('homeContactContent'))
+      $ionicGesture.on('swipeleft', function(event) {
+        $state.go('home.group')
+      }, tabContentEles)
+    });
+
     function initStarContacts() {
       $scope.starContacts = [];
     }
 
     function initRecentContacts() {
-      $scope.recentContacts = [];
+      var contacts = [{
+          uid: 1,
+          display_name: 'jenny',
+          fnpy: 'jenny',
+          img_url: ''
+        },
+        {
+          uid: 2,
+          display_name: '张晶',
+          fnpy: 'zhang jing',
+          phone: "19900001041",
+          rank: 0,
+          img_url: '',
+          hasMsg: true
+        },
+        {
+          uid: 3,
+          display_name: '张成',
+          fnpy: 'zhang cheng',
+          phone: "19900001041",
+          rank: 0,
+          img_url: ''
+        },
+        {
+          uid: 4,
+          display_name: 'lily',
+          rank: 0,
+          fnpy: 'lily',
+          phone: "19900001041",
+          img_url: ''
+        }
+      ];
+      $scope.recentContacts = contacts;
     }
 
     function initAllContacts() {
@@ -271,7 +341,9 @@ angular.module('starter', ['ionic', 'angular.filter'])
     }
   })
   .controller('HomeGroupController', function($scope) {
-
+    $scope.doubleTap = function() {
+      console.log("hello")
+    }
   })
   .controller('HomeFuncboxController', function($scope, $ionicModal, $ionicHistory, $ionicSlideBoxDelegate) {
     $scope.activeSlideIndex = 0;
@@ -570,7 +642,8 @@ angular.module('starter', ['ionic', 'angular.filter'])
         url: '/home',
         cache: true,
         abstract: true,
-        templateUrl: 'base/home/home.html'
+        templateUrl: 'base/home/home.html',
+        controller: 'HomeController'
       })
       .state('home.contact', {
         url: '/contact',

@@ -11,7 +11,7 @@
       <input type="text" placeholder="搜索" ng-model="searchText">
     </label>
   </ion-header-bar>
-  <ion-content>
+  <ion-content delegate-handle="homeContactContent" overflow-scroll="true" class="tabs-content" id="homeContactContent">
     <div class="distinct-dispatcher">
       <div class="item-divider">直管调度台</div>
       <ul class="dispatcher-list">
@@ -36,6 +36,7 @@
       <ion-item class="item-remove-animate item-avatar" ng-repeat="contact in recentContacts" type="item-text-wrap" href="chat/{{contact.uid}}/user/1">
         <img src="img/icon/itrunk_user.png" />
         <h2>{{contact.display_name}}</h2>
+        <span ng-class="{'has-message': contact.hasMsg}"></span>
       </ion-item>
     </ion-list>
     <!--  <ion-list class="all-contacts contacts-category-list" ng-if="allContacts && allContacts.length > 0" ng-repeat="cateContacts in allContacts">
