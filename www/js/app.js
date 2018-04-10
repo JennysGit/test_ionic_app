@@ -119,6 +119,7 @@ angular.module('starter', ['ionic', 'angular.filter'])
     let homeTab = document.getElementsByClassName('home-tab-nav')[0];
     let ngHomeTab = angular.element(homeTab);
     console.log(ngHomeTab)
+
     $ionicGesture.on('doubletap', function(event) {
       // console.log(event)
       let targetUrl = event.target.baseURI;
@@ -130,10 +131,13 @@ angular.module('starter', ['ionic', 'angular.filter'])
       }
     }, ngHomeTab)
 
+
+    // $ionicGesture.on('')
   })
   .controller('ResetPasswordController', function($scope, ) {})
   .controller('HomeContactController', function($scope, $filter, $timeout, $ionicGesture, $state, $ionicScrollDelegate) {
     $scope.hideNum = true;
+    $scope.showContactView = true;
     initStarContacts();
     initRecentContacts();
     initAllContacts();
@@ -152,12 +156,18 @@ angular.module('starter', ['ionic', 'angular.filter'])
       // $ionicScrollDelegate.$getByHandle('homeContactContent').scrollBottom();
     })
 
-    $scope.$on('$ionicView.afterEnter', function() {
-      let tabContentEles = angular.element(document.getElementById('homeContactContent'))
-      $ionicGesture.on('swipeleft', function(event) {
-        $state.go('home.group')
-      }, tabContentEles)
-    });
+    // $scope.$on('$ionicView.afterEnter', function() {
+    //   let tabContentEles = angular.element(document.getElementById('homeContactContent'))
+    //   $ionicGesture.on('swipeleft', function(event) {
+    //     console.log("swipe left", event)
+    //     $state.go('home.group')
+    //   }, tabContentEles)
+    // });
+
+    $scope.clearSearchText = function() {
+      console.log('hell')
+      $scope.searchText = '';
+    }
 
     function initStarContacts() {
       $scope.starContacts = [];
@@ -222,7 +232,8 @@ angular.module('starter', ['ionic', 'angular.filter'])
       }
       $scope.allContacts = allContacts;
       $scope.sidebarList = sidebarList;
-      console.log("add begin char", Date.now() - startTime);
+
+      console.log("add begin char", Date.now() - startTime)
       //console.log($scope.allContacts);
 
 
@@ -340,7 +351,12 @@ angular.module('starter', ['ionic', 'angular.filter'])
       console.log("test");
     }
   })
-  .controller('HomeGroupController', function($scope) {
+  .controller('HomeGroupController', function($scope, $window, $state) {
+    let groupView = '';
+    $scope.$on('$ionicView.afterEnter', function() {
+      groupView = angular.element(document.getElementById('homeGroupView'))
+    });
+    let windowWidth = $window.innerWidth;
     $scope.doubleTap = function() {
       console.log("hello")
     }
@@ -351,7 +367,7 @@ angular.module('starter', ['ionic', 'angular.filter'])
       $scope: $scope,
     }).then(function(modal) {
       $scope.modal = modal;
-      $scope.modal.show();
+      //$scope.modal.show();
 
       $scope.modal.shareVideo = function() {
         $scope.distributeModal.show();
@@ -614,6 +630,9 @@ angular.module('starter', ['ionic', 'angular.filter'])
       $scope.activeSlideIndex = index;
     }
   })
+  .controller('GroupUpdateUserController', function($scope, $stateParams) {
+    console.log($stateParams);
+  })
   .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
     $stateProvider
       .state('login', {
@@ -689,6 +708,11 @@ angular.module('starter', ['ionic', 'angular.filter'])
         templateUrl: 'base/home/local.picture.html',
         controller: 'LocalPictureController'
       })
+      .state('groupUpdateUser', {
+        url: '/groupUpdateUser/:operate',
+        templateUrl: 'base/home/group/group.add-user.html',
+        controller: 'GroupUpdateUserController'
+      })
 
     $urlRouterProvider.otherwise('/login');
     $ionicConfigProvider.tabs.position('bottom');
@@ -754,9 +778,9 @@ angular.module('starter', ['ionic', 'angular.filter'])
     return {
       restrict: 'E',
       template: `<div class="side-bar contact-sidebar">
-                    <ul ng-class="{'in-press': showCurrentNumber}">
+                    <ul ng-class="{'in-press': showCurrentNumber}" class="count-{{count}}">
                        <li ng-repeat="item in sidebarList" on-touch="touchStart($event,item);" on-release="touchEnd($event);" on-drag="touchMove($event, item);" id="{{item}}">
-                        {{item}}
+                        <span>{{item}}</span>
                       </li>
                     </ul>
                   </div>
@@ -771,6 +795,13 @@ angular.module('starter', ['ionic', 'angular.filter'])
         scope.showCurrentNumber = false;
         scope.currentNumber = "";
         var width = $window.innerWidth - 10;
+        scope.sidebarList = ["*", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+        // scope.sidebarList = ["*", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T"]
+        //scope.sidebarList = ["*", "A", "B", "C", "D", "E", "F"];
+        // scope.sidebarList = ["*", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N"]
+        console.log(scope.sidebarList);
+
+        scope.count = parseInt(scope.sidebarList.length / 5);
 
         scope.goToIndex = function(item) {
           if (item === '*') {
@@ -886,6 +917,188 @@ angular.module('starter', ['ionic', 'angular.filter'])
           scope.isPttRecording = false;
           scope.pttReject = 0;
         }
+      }
+    }
+  })
+  .directive('homeTabSlider', function($window, $ionicGesture, $state) {
+    return {
+      restrict: 'A',
+      link: function(scope, eles, attrs) {
+        const tabSliders = [{
+            name: 'contact',
+            url: 'home.contact',
+            navId: 'contactNavView',
+            viewId: 'homeContactView'
+          }, {
+            name: 'group',
+            url: 'home.group',
+            navId: 'groupNavView',
+            viewId: 'homeGroupView'
+          },
+          {
+            name: 'funcbox',
+            url: 'home.funcbox',
+            navId: 'funcboxNavView',
+            viewId: 'homeFuncboxView'
+          }
+          // },
+          // {
+          //   name: 'setting',
+          //   url: 'setting',
+          //   navId: '',
+          //   viewId: ''
+          // }
+        ];
+
+        var windowWidth = $window.innerWidth;
+
+        eles.ready(function() {
+          currentIndex = parseInt(attrs.homeTabSlider);
+          let curSlider = tabSliders[currentIndex],
+            prevSlider = null,
+            nextSlider = null;
+          if (currentIndex != 0) {
+            prevSlider = tabSliders[currentIndex - 1];
+          }
+          nextSlider = tabSliders[currentIndex + 1];
+
+          let $curNavView, $prevNavView, $nextNavView;
+
+          let $curSliderView = null,
+            $prevSliderView = null,
+            $nextSliderView = null;
+
+          // 
+          let dragState = 0; // 
+
+          $ionicGesture.on('dragstart', function($event) {
+            $event.stopPropagation();
+
+            $curNavView = angular.element(document.getElementById(curSlider.navId));
+            $curSliderView = angular.element(document.getElementById(curSlider.viewId));
+            console.log("#slider view", $curSliderView)
+
+            if (prevSlider) {
+              let prevNavViewDom = document.getElementById(prevSlider.navId);
+              if (prevNavViewDom) {
+                $prevNavView = angular.element(prevNavViewDom);
+                $prevNavView.css('display', 'block');
+                $prevSliderView = angular.element(document.getElementById(prevSlider.viewId));
+                $prevSliderView.css('transform', 'translate3d(' + (-windowWidth) + 'px, 0px, 0px)');
+              }
+            }
+
+            if (nextSlider) {
+
+              let nextNavViewDom = document.getElementById(nextSlider.navId);
+              if (nextNavViewDom) {
+                $nextNavView = angular.element(nextNavViewDom);
+                $nextSliderView = angular.element(document.getElementById(nextSlider.viewId));
+                $nextNavView.css('display', 'block');
+                $nextSliderView.css('transform', 'translate3d(' + windowWidth + 'px, 0px, 0px)');
+              }
+            }
+          }, eles)
+
+          $ionicGesture.on('dragleft', function($event) {
+            $event.stopPropagation();
+            console.log($curSliderView, $event.gesture.deltaX)
+            dragState = 1; // drag left.
+            $curSliderView.css('transform', 'translate3d(' + $event.gesture.deltaX + 'px, 0px, 0px)');
+
+            if ($nextSliderView) {
+              $nextSliderView.css('transform', 'translate3d(' + ($event.gesture.deltaX + windowWidth) + 'px, 0px, 0px)');
+            }
+          }, eles)
+
+          $ionicGesture.on('dragright', function($event) {
+            $curSliderView.css('transform', 'translate3d(' + $event.gesture.deltaX + 'px, 0px, 0px)');
+            console.log("swipeRight")
+            dragState = -1;
+
+            console.log("width", $event.gesture.deltaX - windowWidth)
+
+            if ($prevSliderView) {
+              $prevSliderView.css('transform', 'translate3d(' + ($event.gesture.deltaX - windowWidth) + 'px, 0px, 0px)');
+            }
+          }, eles)
+
+          $ionicGesture.on('dragend', function($event) {
+            $event.stopPropagation();
+            console.log(dragState)
+
+            if (dragState == -1) {
+              if (prevSlider) {
+                $state.go(prevSlider.url);
+                $curSliderView.css('transform', 'translate3d(100%, 0px, 0px)');
+                $window.setTimeout(function() {
+                  $curSliderView.css('transform', 'translate3d(0%, 0px, 0px)');
+                }, 300);
+              } else {
+                $curSliderView.css('transform', 'translate3d(0%, 0px, 0px)');
+              }
+            } else if (dragState == 1) {
+              if (nextSlider) {
+                $state.go(nextSlider.url);
+                // 向右
+                $curSliderView.css('transform', 'translate3d(-100%, 0px, 0px)');
+
+                $window.setTimeout(function() {
+                  $curSliderView.css('transform', 'translate3d(0%, 0px, 0px)');
+                }, 300);
+              } else {
+                $curSliderView.css('transform', 'translate3d(0%, 0px, 0px)');
+              }
+            }
+
+            if ($prevNavView) {
+              $prevNavView.removeAttr('style');
+              $prevSliderView.css('transform', 'translate3d(0%, 0px, 0px)');
+            }
+            if ($nextNavView) {
+              $nextNavView.removeAttr('style');
+              $nextSliderView.css('transform', 'translate3d(0%, 0px, 0px)');
+            }
+
+            console.log('dragend')
+          }, eles)
+        })
+      }
+    }
+  })
+  .directive('toggleUserList', function() {
+    return {
+      restrict: 'A',
+      link: function(scope, eles, attrs) {
+        console.log(eles);
+        let targetClass = attrs.toggleUserList;
+        console.log(targetClass);
+        eles.on('click', function() {
+
+          let parentDom = eles.parent()[0];
+          let $childrenDom = eles.children();
+          let $minusIcon = $childrenDom.eq(0),
+            $addIcon = $childrenDom.eq(1);
+
+          console.log($childrenDom)
+          if ($minusIcon.hasClass('hide')) {
+            $minusIcon.removeClass('hide')
+            $addIcon.addClass('hide')
+          } else {
+            $minusIcon.addClass('hide')
+            $addIcon.removeClass('hide')
+          }
+          let nextDom = parentDom.querySelectorAll('.' + targetClass);
+          // console.log(parentDom, targetClass);
+          let $nextDom = angular.element(nextDom);
+          //console.log("$nextDom", $nextDom);
+
+          if ($nextDom.hasClass('ng-hide')) {
+            $nextDom.removeClass('ng-hide')
+          } else {
+            $nextDom.addClass('ng-hide')
+          }
+        })
       }
     }
   })

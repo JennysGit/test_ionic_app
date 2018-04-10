@@ -1,0 +1,28 @@
+<ion-view view-title="邀请成员" id="homeGroupView">
+  <ion-header-bar class="bar-positive">
+    <div class="buttons">
+      <button class="button" ng-click="back()"><i class="icon ion-arrow-left-a"></i></button>
+    </div>
+    <h1 class="title">新建临时通话组</h1>
+    <div class="buttons">
+      <button class="button" ng-click="saveGroup()">
+        <i class="icon ion-checkmark"></i>
+      </button>
+    </div>
+  </ion-header-bar>
+  <ion-header-bar class="bar-subheader second-subheader">
+    <div class="item item-input item-checkbox item-checkbox-right">
+      <form id="contactSearchFormForTg" name="contactSearchFormForTg" ng-submit="submitSearchFormForTg()">
+        <label>
+          <i class="icon ion-search placeholder-icon" style="left:20px;"></i>
+          <input id="searchTextInputForTg" type="text" placeholder="搜索好友" ng-model="searchText" style="margin-left:45px;">
+        </label>
+      </form>
+      <div class="checkbox">
+        <input type="checkbox" ng-model="allContactsSelect" ng-change="checkAllContacts()" />
+      </div>
+    </div>
+  </ion-header-bar>
+  <ion-content class="tabs-content">
+  </ion-content>
+</ion-view>

@@ -120,8 +120,7 @@ ion-item.item {
 .item-contact.item:not(.item-complex),
 .item-contact.item-complex .item-content {
 
-  padding-left: 70px;
-  // margin-right: 20px;
+  padding-left: 70px; // margin-right: 20px;
   background: none;
   border-right: none;
   border-left: none;
@@ -162,6 +161,23 @@ ion-item.item {
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* Empty. Add your own CSS if you like */
@@ -246,6 +262,23 @@ a:visited {
     border-radius: 15px;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -427,6 +460,23 @@ h4 {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Starts Server setting modal. */
 
 .modal.server-setting-modal {
@@ -498,6 +548,23 @@ h4 {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* End Server setting modal.  */
 
 .home-tab-nav {
@@ -519,6 +586,23 @@ h4 {
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -578,6 +662,8 @@ h4 {
 }
 
 .home-contact-container {
+
+
   .item-divider {
     background-color: #8f959a;
     color: #fff;
@@ -603,6 +689,24 @@ h4 {
     input {
       color: white;
       padding-top: 0;
+    }
+    .ion-close {
+      padding: 10px;
+    }
+  }
+
+  .contact-tab-header {
+    padding: 0;
+    background: #142c66;
+    >.row {
+      padding: 0 10px;
+      line-height: 40px;
+      a {
+        display: block;
+        &.active {
+          border-bottom: 2px solid white;
+        }
+      }
     }
   }
 
@@ -645,6 +749,18 @@ h4 {
     }
   }
 
+  .organization-user-list {
+    .cate-department {
+      .item-divider {
+        padding-left: 30px;
+        border-top: 1px solid white;
+      }
+    }
+    .item {
+      margin-right: 0;
+    }
+  }
+
   .contact-sidebar {
     ul.active {
       background: black;
@@ -653,7 +769,7 @@ h4 {
       padding-bottom: 10px;
     }
     position: fixed;
-    top: 70px;
+    top: 88px;
     bottom: 50px;
     right: 0;
     width: 20px;
@@ -662,8 +778,41 @@ h4 {
     text-align: center;
     ul {
       width: 100%;
+      max-height: 100%;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      min-height: 50%;
+      border-radius: 10px;
+      &.in-press {
+        background: black;
+      }
+
+      &.count-1 {
+        min-height: 60%;
+      }
+      &.count-2 {
+        min-height: 80%;
+      }
+
+      &.count-3 {
+        min-height: 90%;
+      }
+
+      &.count-4,
+      &.count-5 {
+        min-height: 100%;
+      }
       li {
-        line-height: 30px;
+        flex: 1;
+        position: relative;
+        span {
+          position: absolute;
+
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
       }
     }
   }
@@ -876,6 +1025,7 @@ h4 {
   background: transparent;
   z-index: 10;
 }
+
 span.has-message {
   display: inline-block;
   position: absolute;
@@ -886,3 +1036,20 @@ span.has-message {
   border-radius: 100%;
   top: 8px;
 }
+
+.tab-content.is-sliding {
+  display: block;
+}
+
+.second-subheader {
+  top: 88px;
+}
+
+.two-subheader-content {
+  top: 132px;
+}
+.hide {
+  display: none;
+}
+
+

@@ -1,17 +1,28 @@
-<ion-view class="home-contact-container">
+<ion-view class="home-contact-container" id="homeContactView">
   <ion-header-bar class="bar-positive" align-title="center">
     <button class="button left-logo-container" ng-click="$parent.modal.show()">
       <img class="logo" src="img/icon/itrunk_logo_big2.png" alt="logo">
     </button>
     <h1 class="title home-title title-center">四川监狱移动指挥调度系统</h1>
   </ion-header-bar>
-  <ion-header-bar class="bar-subheader item-input">
+  <ion-header-bar class="bar-subheader contact-tab-header">
+    <div class="row text-center">
+      <div class="col-50">
+        <a ng-click="showContactView = true" ng-class="{active: showContactView}">人员</a>
+      </div>
+      <div class="col-50">
+        <a ng-click="showContactView = false" ng-class="{active: !showContactView}">组织</a>
+      </div>
+    </div>
+  </ion-header-bar>
+  <ion-header-bar class="bar-subheader item-input second-subheader" ng-show="showContactView">
     <label class="item item-input">
       <i class="icon ion-search placeholder-icon"></i>
-      <input type="text" placeholder="搜索" ng-model="searchText">
+      <input id="contactSearchText" type="text" placeholder="搜索" ng-model="searchText">
     </label>
+    <i class="ion ion-close placeholder-icon" ng-click="searchText = ''" ng-show="searchText"></i>
   </ion-header-bar>
-  <ion-content delegate-handle="homeContactContent" overflow-scroll="true" class="tabs-content" id="homeContactContent">
+  <ion-content delegate-handle="homeContactContent" overflow-scroll="true" class="tabs-content two-subheader-content" id="homeContactContent" home-tab-slider="0" ng-show="showContactView">
     <div class="distinct-dispatcher">
       <div class="item-divider">直管调度台</div>
       <ul class="dispatcher-list">
@@ -46,15 +57,105 @@
         <h2>{{contact.display_name}}</h2>
       </ion-item>
     </ion-list> -->
-    <ion-list class="all-contacts contacts-category-list" ng-if="allContacts && allContacts.length > 0" ng-repeat="(key, cateContacts) in allContacts | filterBy:['display_name']: searchText | groupBy: 'beginChar'">
+    <!--  <ion-list class="all-contacts contacts-category-list" ng-if="allContacts && allContacts.length > 0" ng-repeat="(key, cateContacts) in allContacts | filterBy:['display_name']: searchText | groupBy: 'beginChar'">
       <ion-item id="contactIndex{{cateContacts.start}}" class="item-divider">{{key}}</ion-item>
       <ion-item class="item-remove-animate item-avatar" ng-repeat="contact in cateContacts" type="item-text-wrap" href="#/chat/user/{{contact.uid}}/0">
         <img src="img/icon/itrunk_user.png" />
         <h2>{{contact.display_name}}</h2>
       </ion-item>
+    </ion-list> -->
+    <!--  <ul>
+      <li>
+        <span>四川省监狱管理局</span>
+        <ul>
+          <li>领导1</li>
+          <li>领导4</li>
+          <li>领导13</li>
+          <li>领导w</li>
+        </ul>
+      </li>
+    </ul> -->
+  </ion-content>
+  <ion-content ng-hide="showContactView" class="two-subheader-content">
+    <ion-list class="organization-user-list contacts-category-list">
+      <ion-list class="cate-prison">
+        <ion-item class="item-divider cate-prison-divider" toggle-user-list="cate-department">四川省监狱管理局
+          <span style="float:right;" class="minus">-</span>
+          <span style="float:right;" class="add hide">+</span>
+        </ion-item>
+        <ion-list class="cate-department">
+          <ion-item class="item-divider" toggle-user-list="depart-office-user">信息保障中心<span style="float:right;" class="minus">-</span>
+            <span style="float:right;" class="add hide">+</span></ion-item>
+          <ion-list class="depart-office-user">
+            <ion-item class="item-divider third-item" toggle-user-list="depart-office-user">中心领导<span style="float:right;" class="minus">-</span>
+              <span style="float:right;" class="add hide">+</span></ion-item>
+            <ion-list class="depart-office-user">
+              <ion-item class="item-remove-animate item-avatar" href="javascript:;">
+                <img src="img/icon/itrunk_user.png" />
+                <h2>张三</h2>
+                <span ng-class="{'has-message': contact.hasMsg}"></span>
+              </ion-item>
+              <ion-item class="item-remove-animate item-avatar" href="javascript:;">
+                <img src="img/icon/itrunk_user.png" />
+                <h2>张三</h2>
+                <span ng-class="{'has-message': contact.hasMsg}"></span>
+              </ion-item>
+              <ion-item class="item-remove-animate item-avatar" href="javascript:;">
+                <img src="img/icon/itrunk_user.png" />
+                <h2>张三</h2>
+                <span ng-class="{'has-message': contact.hasMsg}"></span>
+              </ion-item>
+            </ion-list>
+          </ion-list>
+        </ion-list>
+        <ion-list class="cate-department">
+          <ion-item class="item-divider">警用装备科<span style="float:right;" class="add hide">+</span><span style="float:right;" class="minus">-</span></ion-item>
+          <ion-item class="item-remove-animate item-avatar" href="javascript:;">
+            <img src="img/icon/itrunk_user.png" />
+            <h2>张三</h2>
+            <span ng-class="{'has-message': contact.hasMsg}"></span>
+          </ion-item>
+          <ion-item class="item-remove-animate item-avatar" href="javascript:;">
+            <img src="img/icon/itrunk_user.png" />
+            <h2>张三</h2>
+            <span ng-class="{'has-message': contact.hasMsg}"></span>
+          </ion-item>
+          <ion-item class="item-remove-animate item-avatar" href="javascript:;">
+            <img src="img/icon/itrunk_user.png" />
+            <h2>张三</h2>
+            <span ng-class="{'has-message': contact.hasMsg}"></span>
+          </ion-item>
+          <ion-item class="item-remove-animate item-avatar" href="javascript:;">
+            <img src="img/icon/itrunk_user.png" />
+            <h2>张三</h2>
+            <span ng-class="{'has-message': contact.hasMsg}"></span>
+          </ion-item>
+        </ion-list>
+      </ion-list>
+      <ion-list class="cate-prison">
+        <ion-item id="prison1" class="item-divider cate-prison-divider">雷马屏监狱<span style="float:right;" class="minus">-</span>
+          <span style="float:right;" class="add hide">+</span></ion-item>
+        <ion-list class="cate-department">
+          <ion-item class="item-divider">
+            警用装备科
+            <span style="float:right;" class="minus">-</span>
+            <span style="float:right;" class="add hide">+</span>
+          </ion-item>
+          <ion-item class="item-remove-animate item-avatar" href="javascript:;">
+            <img src="img/icon/itrunk_user.png" />
+            <h2>张三</h2>
+            <span ng-class="{'has-message': contact.hasMsg}"></span>
+          </ion-item>
+          <ion-item class="item-remove-animate item-avatar" href="javascript:;">
+            <img src="img/icon/itrunk_user.png" />
+            <h2>张三</h2>
+            <span ng-class="{'has-message': contact.hasMsg}"></span>
+          </ion-item>
+        </ion-list>
+      </ion-list>
     </ion-list>
   </ion-content>
-  <contact-sidebar-index sidebar-list="sidebarList"></contact-sidebar-index>
+  <contact-sidebar-index sidebar-list="sidebarList" ng-show="showContactView"></contact-sidebar-index>
   <!-- <div class="side-bar home-contact-sidebar">
     <ul ng-class="{'active': !hideNum}">
       <li class="side-bar-item" ng-repeat="item in sidebarList" on-touch="goToIndex($event,item)" on-release="clearNum()" on-drag="moveIndex($event,item)">
